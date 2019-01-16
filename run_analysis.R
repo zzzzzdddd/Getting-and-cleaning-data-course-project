@@ -9,7 +9,7 @@ if (!file.exists("UCI HAR Dataset")) {
 }  
 
 
-# According to the README.txt, read the data and assign to variables
+# according to the README.txt, read the data and assign to variables
 # all features
 features <- read.table("UCI HAR Dataset/features.txt", col.names = c("n","functions"))
 # link class labels with their activity name
@@ -34,15 +34,13 @@ y <- rbind(trlab, tslab)
 subjects <- rbind(subject_train, subject_test)
 md <- cbind(subjects, y, x)
 
-# Extracts only the measurements on the mean and standard deviation for 
+# extracts only the measurements on the mean and standard deviation for 
 # each measurement.
 td <- md %>% 
   select(subject, code, contains("mean"), contains("std"))
 
-# Uses descriptive activity names to name the activities in the data set
+# use descriptive activity names to name the activities in the data set
 td$code <- activities[td$code, 2]
-
-# Appropriately labels the data set with descriptive variable names.
 names(td)[2] = "activity"
 names(td)<-gsub("Acc", "accelerometer ", names(td))
 names(td)<-gsub("Gyro", "gyroscope ", names(td))
@@ -62,7 +60,7 @@ names(td)<-gsub("meanFreq", "mean frequency", names(td))
 names(td)<-gsub("gravityMean", "gravity mean", names(td))
 names(td)<-gsub(".mean", "mean", names(td))
 
-# From the data set in in the previous step, create another independent 
+# from the data set in in the previous step, create another independent 
 # tidy data set with the average of each variable for each activity and 
 # each subject.
 sitd <- td %>%
